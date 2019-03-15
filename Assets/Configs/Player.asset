@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1f401ee5d99e494da633634d66e3cd3, type: 3}
+  m_Name: Player
+  m_EditorClassIdentifier: 
+  normal:
+    walkSpeed: 8
+    runSpeed: 15
+    lookAroundSens: 5
+    lookAroundSmooth: 5
+    jumpForce: 6
+    weaponSwitchTime: 1
+    maxYAngleForCamera: 80
+  manic:
+    walkSpeed: 10
+    runSpeed: 17
+    lookAroundSens: 5
+    lookAroundSmooth: 5
+    jumpForce: 6
+    weaponSwitchTime: 1
+    maxYAngleForCamera: 80
+  psychotic:
+    walkSpeed: 8
+    runSpeed: 50
+    lookAroundSens: 5
+    lookAroundSmooth: 5
+    jumpForce: 50
+    weaponSwitchTime: 0
+    maxYAngleForCamera: 80
+  depressed:
+    walkSpeed: 6
+    runSpeed: 10
+    lookAroundSens: 4
+    lookAroundSmooth: 15
+    jumpForce: 5
+    weaponSwitchTime: 1
+    maxYAngleForCamera: 80
