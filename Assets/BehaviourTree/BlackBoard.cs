@@ -8,6 +8,9 @@ public class BlackBoard {
     public NavMeshAgent navAgent;
     public float moveSpeed = 3f;
     public float sightRange = 10f;
+    public EnemyFOV fov;
+    [HideInInspector] public Vector3 OldSpot;
+    [HideInInspector] public Vector3 NewSpot;
 }
 
 /*

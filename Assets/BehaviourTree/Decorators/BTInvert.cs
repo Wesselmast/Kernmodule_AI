@@ -1,4 +1,4 @@
-﻿namespace VaalsBT {
+﻿namespace IMBT {
     public class BTInvert : BTNodeBase {
         private BTNodeBase node;
         public BTInvert(BTNodeBase node) {

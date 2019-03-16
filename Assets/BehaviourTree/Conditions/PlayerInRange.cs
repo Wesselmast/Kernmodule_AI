@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
-using VaalsBT;
+using IMBT;
 
 public class PlayerInRange : BTNodeBase {
-    private float range;
+    private readonly float range;
+
     public PlayerInRange(float range) {
         this.range = range;
     }

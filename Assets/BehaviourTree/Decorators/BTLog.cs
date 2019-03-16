@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace VaalsBT {
+namespace IMBT {
     public class BTLog : BTNodeBase {
         private readonly string logString;
 
