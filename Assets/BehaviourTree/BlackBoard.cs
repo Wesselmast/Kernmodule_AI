@@ -1,17 +1,22 @@
 ﻿using UnityEngine;
-using UnityEngine.AI;
+using IMBT;
 
 [System.Serializable]
-public class BlackBoard {
-    public Transform target;
-    public GameObject agent;
-    public NavMeshAgent navAgent;
-    public float moveSpeed = 3f;
-    public float sightRange = 10f;
-    public EnemyFOV fov;
+public struct BlackBoard {
+    public BlackBoardSettings Settings;
     [HideInInspector] public Vector3 OldSpot;
-    [HideInInspector] public bool Inspected = true;
-    [HideInInspector] public bool OldSpotSaved = false;
+    [HideInInspector] public bool Inspected;
+    [HideInInspector] public bool IsPatrolling;
+    [HideInInspector] public bool IsMovingBack;
+    [HideInInspector] public bool IsInspecting;
+    [HideInInspector] public bool OldSpotSaved;
+    [HideInInspector] public bool WasInGroupInspect;
+    [HideInInspector] public Vector3[] Path;
+    [HideInInspector] public BTState State;
+    [HideInInspector] public GameObject Agent;
+    [HideInInspector] public EnemyFOV Fov;
+    [HideInInspector] public WaypointCollection PatrolPath;
+    [HideInInspector] public Transform Target;
 }
 
 /*

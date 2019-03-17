@@ -4,52 +4,87 @@ using IMBT;
 
 public class ComplexEnemy : MonoBehaviour {
     [SerializeField] private BlackBoard blackBoard;
+    [SerializeField] private WaypointCollection patrolPath;
+    [SerializeField] private Transform target;
     private BTSelector BT;
+
+    private void Awake() {
+        blackBoard.Inspected = false;
+        blackBoard.IsPatrolling = false;
+        blackBoard.WasInGroupInspect = false;
+        blackBoard.Agent = gameObject;
+        blackBoard.Fov = GetComponent<EnemyFOV>();
+        blackBoard.PatrolPath = patrolPath;
+        blackBoard.Target = target;
+        blackBoard.State = BTState.Patrol;
+    }
 
     void Start() {
         BT =
             new BTSelector(
-                new BTSequence(
-                    new TargetInShootableRange(),
-                    new BTLog("PEW!")
-                    ),
-                new BTSequence(
-                    new TargetInVisibleRange(),
+                new BTSelector(
                     new BTSequence(
-                        new BTTimer(.5f, false),
-                        new BTLog("Inspect"),
-                        new BTSelector(
-                            /*new BTSequence(
-                                new BTTimer(.5f, false),
-                                new BTLog("Group-Inspect"),
-                                new BTSelector(
-                                    new BTTimer(.5f),
-                                    new BTLog("Combat")
-                                    )
-                                ),*/
-                            new BTSelector( //inspect\
-                                    new BTSequence(
-                                        new CheckIfHasInspected(),
-                                        new MoveBackToOldSpot(),
-                                        new BTLog("Moved Back")
-                                        ),
-                                    new BTSequence(
-                                        new SaveOldSpot(),
-                                        new InspectTransform(blackBoard.target),
-                                        new BTLog("Look Around")
-                                        )
-                                    )
-                                )
+                        new WasInGroupInspect(),
+                        new SetCurrentState(BTState.GroupInspect),
+                        new TargetInVisibleRange(),
+                        new BTSequence(
+                            new BTTimer(2f),
+                            new SetCurrentState(BTState.Combat),
+                            new BTLog("Enter Combat"),
+                            new BTBreak()
                             )
                         ),
-                        new BTSelector( //Passive state, seems to be consistently working
+                    new BTSequence(
+                        new TargetInVisibleRange(),
+                        new BTSequence(
+                            new BTTimer(.5f, false),
+                            new SetCurrentState(BTState.Inspect),
                             new BTSequence(
-                                new BTTimer(2f),
-                                new BTLog("Talk To A Friend")
-                                ),
-                            new BTLog("Patrolling")
+                                new BTTimer(25f, false),
+                                new SetCurrentState(BTState.GroupInspect),
+                                new BTBreak() //dispose of this tree
+                                )
+                            )
                         )
-            );
+                    ),
+                 new BTSequence(
+                     new IsInState(BTState.Combat),
+                     new BTLog("COMBAT PEW PEW!")
+                     ),
+                 new BTSequence(
+                     new IsInState(BTState.GroupInspect),
+                     new BTLog("GroupInspect!"),
+                     new BTSequence(
+                        new BTTimer(2f),
+                        new BTLog("YELL OUT")
+                        )
+                     ),
+                 new BTSequence(
+                    new IsInState(BTState.Inspect),
+                    new BTLog("Inspecting"),
+                    new BTSequence(
+                         new SaveOldSpot(),
+                         new InspectTarget(this),
+                         new BTLog("Look Around"),
+                         new SetCurrentState(BTState.Patrol)
+                       )
+                    ),
+                 new BTSequence(
+                    new IsInState(BTState.Patrol),
+                    new BTSelector(
+                        new BTSequence(
+                            new CheckIfHasInspected(),
+                            new BTLog("Moving Back To Patrol"),
+                            new MoveBackToOldSpot(this)
+                            ),
+                        new DoAPatrol(this)
+                        ),
+                    new BTSequence(
+                        new BTTimer(2f),
+                        new BTLog("Talk To A Friend")
+                        )
+                    )
+                );
     }
 
     private void Update() {
@@ -57,6 +92,11 @@ public class ComplexEnemy : MonoBehaviour {
     }
 
     private void OnDrawGizmos() {
-        Gizmos.DrawCube(blackBoard.OldSpot, Vector3.one * 2);
+        if (blackBoard.Path != null) {
+            for (int i = 0; i < blackBoard.Path.Length; i++) {
+                Gizmos.color = Color.cyan;
+                Gizmos.DrawCube(blackBoard.Path[i], Vector3.one);
+            }
+        }
     }
 }

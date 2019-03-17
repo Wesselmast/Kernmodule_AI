@@ -1,20 +1,20 @@
 ﻿namespace IMBT {
-    public class BTSequence : BTNodeBase {
-        private BTNodeBase[] nodes;
-        public BTSequence(params BTNodeBase[] nodes) {
+    public class BTSequence : BTNode {
+        private BTNode[] nodes;
+        public BTSequence(params BTNode[] nodes) {
             this.nodes = nodes;
         }
 
-        public override TaskStatus Tick(BlackBoard bb) {
-            foreach (BTNodeBase b in nodes) {
-                TaskStatus status = b.Tick(bb);
+        public override BTTaskStatus Tick(BlackBoard bb) {
+            foreach (BTNode b in nodes) {
+                BTTaskStatus status = b.Tick(bb);
                 switch (status) {
-                    case TaskStatus.Failed: return TaskStatus.Failed;
-                    case TaskStatus.Running: return TaskStatus.Running;
-                    case TaskStatus.Success: continue;
+                    case BTTaskStatus.Failed: return BTTaskStatus.Failed;
+                    case BTTaskStatus.Running: return BTTaskStatus.Running;
+                    case BTTaskStatus.Success: continue;
                 }
             }
-            return TaskStatus.Success;
+            return BTTaskStatus.Success;
         }
     }
 }

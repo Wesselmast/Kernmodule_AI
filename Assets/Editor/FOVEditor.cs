@@ -21,7 +21,7 @@ public class FOVEditor : Editor {
             0, 
             fov.transform.position, 
             fov.transform.rotation * Quaternion.LookRotation(Vector3.forward),
-            2f, 
+            fov.ViewRadius / 5f, 
             EventType.Repaint
         );
     }

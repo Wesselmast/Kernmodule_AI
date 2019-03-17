@@ -1,16 +1,16 @@
 ﻿using UnityEngine;
 
 namespace IMBT {
-    public class BTLog : BTNodeBase {
-        private readonly string logString;
+    public class BTLog : BTNode {
+        private readonly string message;
 
-        public BTLog(string logString) {
-            this.logString = logString;
+        public BTLog(string message) {
+            this.message = message;
         }
 
-        public override TaskStatus Tick(BlackBoard bb) {
-            Debug.Log(logString);
-            return TaskStatus.Success;
+        public override BTTaskStatus Tick(BlackBoard bb) {
+            Debug.Log(message);
+            return BTTaskStatus.Success;
         }
     }
 }
