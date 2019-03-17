@@ -3,19 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Spot {
-    New,
-    Old
-}
-
-
 public class TargetInVisibleRange : BTNodeBase {
     public override TaskStatus Tick(BlackBoard bb) {
         Transform target = bb.fov.GetSeeableTarget(bb.target);
         if (target != null) {
-                bb.NewSpot = target.position;
-                return TaskStatus.Success;
-            }
+            return TaskStatus.Success;
+        }
         return TaskStatus.Failed;
     }
 }
@@ -42,7 +35,7 @@ public class BTTimer : BTNodeBase {
     }
 
     public override TaskStatus Tick(BlackBoard bb) {
-        if(elapsed > amtOfSeconds) {
+        if (elapsed > amtOfSeconds) {
             if (reset) elapsed = 0;
             return TaskStatus.Success;
         }

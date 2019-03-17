@@ -1,42 +1,31 @@
 ﻿using UnityEngine;
 using IMBT;
 
-public class MoveToSpot : BTNodeBase {
+public class InspectTransform : BTNodeBase {
 
     private const float approachRange = 1f;
-    private Spot spot;
-    private bool onlyOnce = true;
+    private Transform target;
     private bool done = false;
+    private Vector3 spotToMove = Vector3.zero;
 
-    public MoveToSpot(Spot spot) {
-        this.spot = spot;
-    }
-
-    public MoveToSpot(Spot spot, bool onlyOnce) {
-        this.spot = spot;
-        this.onlyOnce = onlyOnce;
+    public InspectTransform(Transform target) {
+        this.target = target;
     }
 
     public override TaskStatus Tick(BlackBoard bb) {
-
-        Vector3 spotToMove;
-        if (onlyOnce && !done) {
-            bb.OldSpot = bb.agent.transform.position;
-            if (spot == Spot.New) spotToMove = bb.NewSpot;
-            else spotToMove = bb.OldSpot;
+        if (!done) {
+            spotToMove = target.position;
+            bb.Inspected = false;
             done = true;
         }
-        else {
-            if (spot == Spot.New) spotToMove = bb.NewSpot;
-            else spotToMove = bb.OldSpot;
-        }
 
-        if (spotToMove == Vector3.zero) {
+        if (target == null) {
             return TaskStatus.Failed;
         }
 
         float dist = Vector3.Distance(bb.agent.transform.position, spotToMove);
         if (dist < approachRange) {
+            bb.Inspected = true;
             done = false;
             return TaskStatus.Success;
         }
@@ -44,5 +33,46 @@ public class MoveToSpot : BTNodeBase {
             bb.agent.transform.position += (spotToMove - bb.agent.transform.position).normalized * bb.moveSpeed * Time.deltaTime;
             return TaskStatus.Running;
         }
+    }
+}
+
+public class CheckIfHasInspected : BTNodeBase {
+    public override TaskStatus Tick(BlackBoard bb) {
+        if (bb.Inspected) return TaskStatus.Success;
+        return TaskStatus.Failed;
+    }
+}
+
+
+public class MoveBackToOldSpot : BTNodeBase {
+    private const float approachRange = 1f;
+
+    public override TaskStatus Tick(BlackBoard bb) {
+        Vector3 spotToMove = bb.OldSpot;
+
+        if (bb.OldSpot == null) {
+            return TaskStatus.Failed;
+        }
+
+        float dist = Vector3.Distance(bb.agent.transform.position, spotToMove);
+        if (dist < approachRange) {
+            bb.OldSpotSaved = false;
+            bb.Inspected = false;
+            return TaskStatus.Success;
+        }
+        else {
+            bb.agent.transform.position += (spotToMove - bb.agent.transform.position).normalized * bb.moveSpeed * Time.deltaTime;
+            return TaskStatus.Running;
+        }
+    }
+}
+
+public class SaveOldSpot : BTNodeBase {
+    public override TaskStatus Tick(BlackBoard bb) {
+        if (!bb.OldSpotSaved) {
+            bb.OldSpot = bb.agent.transform.position;
+            bb.OldSpotSaved = true;
+        }
+        return TaskStatus.Success;
     }
 }

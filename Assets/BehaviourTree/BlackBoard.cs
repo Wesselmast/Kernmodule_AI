@@ -10,7 +10,8 @@ public class BlackBoard {
     public float sightRange = 10f;
     public EnemyFOV fov;
     [HideInInspector] public Vector3 OldSpot;
-    [HideInInspector] public Vector3 NewSpot;
+    [HideInInspector] public bool Inspected = true;
+    [HideInInspector] public bool OldSpotSaved = false;
 }
 
 /*

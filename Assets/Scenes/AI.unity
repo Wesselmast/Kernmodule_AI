@@ -1083,7 +1083,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &851729621
 Transform:
   m_ObjectHideFlags: 0
@@ -1990,9 +1990,7 @@ MonoBehaviour:
     moveSpeed: 3
     sightRange: 20
     fov: {fileID: 1819590874}
-    SpotEstablished: 0
     OldSpot: {x: 0, y: 0, z: 0}
-    NewSpot: {x: 0, y: 0, z: 0}
 --- !u!4 &1819590872
 Transform:
   m_ObjectHideFlags: 0
