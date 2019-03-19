@@ -13,11 +13,11 @@ namespace IMBT {
 
         public override BTTaskStatus Tick(BlackBoard bb) {
             if (!bb.IsPatrolling) {
+                bb.IsPatrolling = true;
                 bb.Inspected = false;
                 bb.IsInspecting = false;
                 bb.IsMovingBack = false;
-                bb.IsPatrolling = true;
-                if (patrolIndex > bb.PatrolPath.GetWaypoints().Count - 1) patrolIndex = 0;
+                if (patrolIndex > bb.PatrolPath.GetWaypoints().Count - 1) patrolIndex = -1;
                 PathRequestManager.RequestPath(new PathRequest(bb.Agent.transform.position, bb.PatrolPath.GetWaypoints()[patrolIndex].position,
                     (Vector3[] newPath, bool success) => {
                         if (success) {
@@ -37,8 +37,8 @@ namespace IMBT {
                 if (Vector3.Distance(bb.Agent.transform.position, currentWp) < approachRange) {
                     index++;
                     if (index >= bb.Path.Length) {
-                        patrolIndex++;
                         bb.IsPatrolling = false;
+                        patrolIndex++;
                         yield break;
                     }
                     currentWp = bb.Path[index];

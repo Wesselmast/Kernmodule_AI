@@ -2,17 +2,17 @@
 using IMBT;
 
 [System.Serializable]
-public struct BlackBoard {
+public class BlackBoard {
     public BlackBoardSettings Settings;
     [HideInInspector] public Vector3 OldSpot;
-    [HideInInspector] public bool Inspected;
-    [HideInInspector] public bool IsPatrolling;
-    [HideInInspector] public bool IsMovingBack;
-    [HideInInspector] public bool IsInspecting;
-    [HideInInspector] public bool OldSpotSaved;
-    [HideInInspector] public bool WasInGroupInspect;
+    [HideInInspector] public bool Inspected = false;
+    [HideInInspector] public bool IsPatrolling = false;
+    [HideInInspector] public bool IsMovingBack = false;
+    [HideInInspector] public bool IsInspecting = false;
+    [HideInInspector] public bool OldSpotSaved = false;
+    [HideInInspector] public bool WasInGroupInspect = false;
     [HideInInspector] public Vector3[] Path;
-    [HideInInspector] public BTState State;
+    [HideInInspector] public BTState State = BTState.Patrol;
     [HideInInspector] public GameObject Agent;
     [HideInInspector] public EnemyFOV Fov;
     [HideInInspector] public WaypointCollection PatrolPath;

@@ -59,8 +59,8 @@ public struct PathResult {
     public Action<Vector3[], bool> Callback { get; private set; }
 
     public PathResult(Vector3[] path, bool success, Action<Vector3[], bool> callback) {
-        Path = path;
-        Success = success;
-        Callback = callback;
+        this.Path = path;
+        this.Success = success;
+        this.Callback = callback;
     }
 }

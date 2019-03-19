@@ -74,7 +74,7 @@ public class ComplexEnemy : MonoBehaviour {
                     new BTSelector(
                         new BTSequence(
                             new CheckIfHasInspected(),
-                            new BTLog("Moving Back To Patrol"),
+                            new LookAround(),
                             new MoveBackToOldSpot(this)
                             ),
                         new DoAPatrol(this)

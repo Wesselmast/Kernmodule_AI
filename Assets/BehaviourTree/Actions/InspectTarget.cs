@@ -32,7 +32,7 @@ namespace IMBT {
                 doneCalculation = false;
                 return BTTaskStatus.Success;
             }
-            return BTTaskStatus.Running;
+            return BTTaskStatus.Failed;
         }
 
         private IEnumerator DoPath(BlackBoard bb) {
@@ -47,7 +47,7 @@ namespace IMBT {
                     }
                     currentWp = bb.Path[index];
                 }
-                bb.Agent.transform.position += (currentWp - bb.Agent.transform.position).normalized * bb.Settings.MoveSpeed * Time.deltaTime;
+                bb.Agent.transform.position += (currentWp - bb.Agent.transform.position).normalized * bb.Settings.RunSpeed * Time.deltaTime;
                 Quaternion lookRot = Quaternion.LookRotation((currentWp - bb.Agent.transform.position).normalized);
                 bb.Agent.transform.rotation = Quaternion.Slerp(bb.Agent.transform.rotation, lookRot, Time.deltaTime * bb.Settings.TurnSpeed);
                 yield return null;
