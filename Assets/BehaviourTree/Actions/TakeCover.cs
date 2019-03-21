@@ -1,32 +1,33 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace IMBT {
-    public class InspectTarget : BTNode {
-        private const float approachRange = 1f;
-        private readonly MonoBehaviour monoBehaviour;
+    public class TakeCover : BTNode {
+        private MonoBehaviour monoBehaviour;
         private bool doneCalculation = false;
+        private const float approachRange = 1f;
 
-        public InspectTarget(MonoBehaviour monoBehaviour) {
+        public TakeCover(MonoBehaviour monoBehaviour) {
             this.monoBehaviour = monoBehaviour;
         }
 
         public override BTTaskStatus Tick(BlackBoard bb) {
-            if (!bb.IsInspecting) {
-                doneCalculation = false;
-                bb.IsPatrolling = false;
-                bb.IsMovingBack = false;
-                bb.IsInspecting = true;
-                PathRequestManager.RequestPath(new PathRequest(bb.Agent.transform.position, bb.Target.position,
-                    (Vector3[] newPath, bool success) => {
-                        if (success) {
-                            bb.Path = newPath;
-                            monoBehaviour.StopAllCoroutines();
-                            monoBehaviour.StartCoroutine(DoPath(bb));
-                        }
-                    }));
+            if (!bb.IsTakingCover) {
+                bb.IsTakingCover = true;
+                PathRequestManager.RequestPath(new PathRequest(bb.Agent.transform.position, bb.NearestCoverPoint.transform.position,
+                        (Vector3[] newPath, bool success) => {
+                            if (success) {
+                                bb.Path = newPath;
+                                monoBehaviour.StopAllCoroutines();
+                                monoBehaviour.StartCoroutine(DoPath(bb));
+                            }
+                        }));
             }
-            if (doneCalculation) return BTTaskStatus.Success;
+            if (doneCalculation) {
+                bb.IsTakingCover = false;
+                return BTTaskStatus.Success;
+            }
             return BTTaskStatus.Running;
         }
 

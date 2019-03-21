@@ -64,7 +64,7 @@ public class Weapon : MonoBehaviour {
         anim.Play("Slice");
         Vector3 hitPoint = Physics.Raycast(ray, out RaycastHit hit, Settings.MeleeRange) ?
                     hit.point : ray.origin + ray.direction * Settings.MeleeRange;
-        try { hit.collider.GetComponentInParent<IHealth>().TakeDamage(Settings.AttackDamage); }
+        try { hit.collider.GetComponentInParent<IDamagable>().TakeDamage(Settings.AttackDamage); }
         catch { }
     }
 

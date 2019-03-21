@@ -2,24 +2,27 @@
 using UnityEngine;
 
 namespace IMBT {
-    public class InspectTarget : BTNode {
+    public class GroupInspectTarget : BTNode {
         private const float approachRange = 1f;
         private readonly MonoBehaviour monoBehaviour;
         private bool doneCalculation = false;
+        private bool done = false;
 
-        public InspectTarget(MonoBehaviour monoBehaviour) {
+        public GroupInspectTarget(MonoBehaviour monoBehaviour) {
             this.monoBehaviour = monoBehaviour;
         }
 
         public override BTTaskStatus Tick(BlackBoard bb) {
-            if (!bb.IsInspecting) {
+            if (!done) {
+                done = true;
                 doneCalculation = false;
+                bb.IsInspecting = true;
                 bb.IsPatrolling = false;
                 bb.IsMovingBack = false;
-                bb.IsInspecting = true;
                 PathRequestManager.RequestPath(new PathRequest(bb.Agent.transform.position, bb.Target.position,
                     (Vector3[] newPath, bool success) => {
                         if (success) {
+                            bb.Speed = bb.Settings.RunSpeed;
                             bb.Path = newPath;
                             monoBehaviour.StopAllCoroutines();
                             monoBehaviour.StartCoroutine(DoPath(bb));

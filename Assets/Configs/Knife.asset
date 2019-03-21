@@ -17,7 +17,7 @@ MonoBehaviour:
     attackDamage: 100
     maxAmmo: 5
     bulletLifeTime: 0
-    meleeRange: 2
+    meleeRange: 6.2
     bulletTravelSpeed: 100
     bulletSpread: 0
     attackSound: {fileID: 8300000, guid: 441a51c1d3622a64ebaf143f8812a1ff, type: 3}

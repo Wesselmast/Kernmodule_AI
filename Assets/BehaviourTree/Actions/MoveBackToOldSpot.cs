@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace IMBT {
     public class MoveBackToOldSpot : BTNode {
-        private const float approachRange = .3f;
+        private const float approachRange = .5f;
         private bool doneCalculation = false;
         private readonly MonoBehaviour monoBehaviour;
 
@@ -13,9 +13,8 @@ namespace IMBT {
 
         public override BTTaskStatus Tick(BlackBoard bb) {
             if (!bb.IsMovingBack) {
+                doneCalculation = false;
                 bb.IsPatrolling = false;
-                bb.IsInspecting = false;
-                bb.Inspected = false;
                 bb.IsMovingBack = true;
                 PathRequestManager.RequestPath(new PathRequest(bb.Agent.transform.position, bb.OldSpot,
                     (Vector3[] newPath, bool success) => {
@@ -28,7 +27,8 @@ namespace IMBT {
             }
             if (doneCalculation) {
                 bb.OldSpotSaved = false;
-                bb.Inspected = false;
+                bb.IsInspecting = false;
+                if(bb.State == BTState.GroupInspect) bb.WasInGroupInspect = true;
                 return BTTaskStatus.Success;
             }
             return BTTaskStatus.Running;
@@ -46,7 +46,7 @@ namespace IMBT {
                     }
                     currentWp = bb.Path[index];
                 }
-                bb.Agent.transform.position += (currentWp - bb.Agent.transform.position).normalized * bb.Settings.MoveSpeed * Time.deltaTime;
+                bb.Agent.transform.position += (currentWp - bb.Agent.transform.position).normalized * bb.Speed * Time.deltaTime;
                 Quaternion lookRot = Quaternion.LookRotation((currentWp - bb.Agent.transform.position).normalized);
                 bb.Agent.transform.rotation = Quaternion.Slerp(bb.Agent.transform.rotation, lookRot, Time.deltaTime * bb.Settings.TurnSpeed);
                 yield return null;

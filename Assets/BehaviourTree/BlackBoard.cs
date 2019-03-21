@@ -5,10 +5,10 @@ using IMBT;
 public class BlackBoard {
     public BlackBoardSettings Settings;
     [HideInInspector] public Vector3 OldSpot;
-    [HideInInspector] public bool Inspected = false;
     [HideInInspector] public bool IsPatrolling = false;
     [HideInInspector] public bool IsMovingBack = false;
     [HideInInspector] public bool IsInspecting = false;
+    [HideInInspector] public bool IsTakingCover = false;
     [HideInInspector] public bool OldSpotSaved = false;
     [HideInInspector] public bool WasInGroupInspect = false;
     [HideInInspector] public Vector3[] Path;
@@ -17,6 +17,8 @@ public class BlackBoard {
     [HideInInspector] public EnemyFOV Fov;
     [HideInInspector] public WaypointCollection PatrolPath;
     [HideInInspector] public Transform Target;
+    [HideInInspector] public float Speed;
+    [HideInInspector] public Collider NearestCoverPoint;
 }
 
 /*

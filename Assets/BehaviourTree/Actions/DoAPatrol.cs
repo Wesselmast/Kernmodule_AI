@@ -14,20 +14,20 @@ namespace IMBT {
         public override BTTaskStatus Tick(BlackBoard bb) {
             if (!bb.IsPatrolling) {
                 bb.IsPatrolling = true;
-                bb.Inspected = false;
                 bb.IsInspecting = false;
                 bb.IsMovingBack = false;
-                if (patrolIndex > bb.PatrolPath.GetWaypoints().Count - 1) patrolIndex = -1;
+                if (patrolIndex > bb.PatrolPath.GetWaypoints().Count - 1) patrolIndex = 0;
                 PathRequestManager.RequestPath(new PathRequest(bb.Agent.transform.position, bb.PatrolPath.GetWaypoints()[patrolIndex].position,
                     (Vector3[] newPath, bool success) => {
                         if (success) {
+                            patrolIndex++;
                             bb.Path = newPath;
                             monoBehaviour.StopAllCoroutines();
                             monoBehaviour.StartCoroutine(DoPath(bb));
                         }
                     }));
             }
-            return BTTaskStatus.Failed;
+            return BTTaskStatus.Running;
         }
 
         private IEnumerator DoPath(BlackBoard bb) {
@@ -38,12 +38,11 @@ namespace IMBT {
                     index++;
                     if (index >= bb.Path.Length) {
                         bb.IsPatrolling = false;
-                        patrolIndex++;
                         yield break;
                     }
                     currentWp = bb.Path[index];
                 }
-                bb.Agent.transform.position += (currentWp - bb.Agent.transform.position).normalized * bb.Settings.MoveSpeed * Time.deltaTime;
+                bb.Agent.transform.position += (currentWp - bb.Agent.transform.position).normalized * bb.Speed * Time.deltaTime;
                 Quaternion lookRot = Quaternion.LookRotation((currentWp - bb.Agent.transform.position).normalized);
                 bb.Agent.transform.rotation = Quaternion.Slerp(bb.Agent.transform.rotation, lookRot, Time.deltaTime * bb.Settings.TurnSpeed);
                 yield return null;

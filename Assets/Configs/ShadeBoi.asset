@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3b0e1fe55aed9e479f6db5e6ce04b28, type: 3}
   m_Name: ShadeBoi
   m_EditorClassIdentifier: 
-  moveSpeed: 3
-  runSpeed: 11
+  walkSpeed: 7
+  runSpeed: 18
   turnSpeed: 6
-  lookAroundSpeed: 65
+  lookAroundSpeed: 100

@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 public class EnemyFOV : MonoBehaviour {
-    [SerializeField] private float communicationRadius = 15;
+    [SerializeField] private float communicationRadius = 20;
     public float CommunicationRadius { get { return communicationRadius; } }
+    [SerializeField] private float coverPointSearchRadius = 15;
+    public float CoverPointSearchRadius { get { return coverPointSearchRadius; } }
     [SerializeField] private float viewRadius = 10;
     public float ViewRadius { get { return viewRadius; } }
     [SerializeField] private float shootRadius = 5;
@@ -21,6 +24,17 @@ public class EnemyFOV : MonoBehaviour {
 
     public Transform GetShootableTarget(Transform target) {
         return FoundTarget(shootRadius, target) ? target : null;
+    }
+
+    public ComplexEnemy[] GetAlliesInCommunationRadius() {
+        List<ComplexEnemy> allies = new List<ComplexEnemy>();
+        Collider[] overlap = Physics.OverlapSphere(transform.position, communicationRadius, LayerMask.GetMask("Enemy"));
+        foreach (var o in overlap) allies.Add(o.GetComponent<ComplexEnemy>());
+        return allies.ToArray();
+    }
+
+    public Collider[] GetCoversInRange() {
+        return Physics.OverlapSphere(transform.position, coverPointSearchRadius, LayerMask.GetMask("Cover Point"));
     }
 
     private bool FoundTarget(float radius, Transform target) {

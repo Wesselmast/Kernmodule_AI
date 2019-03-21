@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/*
 namespace IMBT {
     public class CheckIfHasInspected : BTNode {
         public override BTTaskStatus Tick(BlackBoard bb) {
@@ -9,4 +9,4 @@ namespace IMBT {
             else return BTTaskStatus.Failed;
         }
     }
-}
+}*/

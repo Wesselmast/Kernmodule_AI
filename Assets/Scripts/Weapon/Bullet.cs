@@ -15,7 +15,7 @@ public class Bullet : MonoBehaviour {
         Vector3 framePos = transform.position;
         transform.position += transform.forward * weapon.Settings.BulletTravelSpeed * Time.deltaTime;
         if (Physics.Linecast(framePos, transform.position, out RaycastHit hit)) {
-            try { hit.collider.GetComponentInParent<IHealth>().TakeDamage(weapon.Settings.AttackDamage); }
+            try { hit.collider.GetComponentInParent<IDamagable>().TakeDamage(weapon.Settings.AttackDamage); }
             catch { }
             BulletPool.Instance.ReturnToPool(this);
         }
