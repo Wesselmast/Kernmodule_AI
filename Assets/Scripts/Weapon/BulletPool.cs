@@ -1,4 +1,2 @@
-﻿using UnityEngine;
-
-public class BulletPool : ObjectPool<Bullet> {
+﻿public class BulletPool : ObjectPool<Bullet> {
 }

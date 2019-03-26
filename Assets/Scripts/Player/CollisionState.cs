@@ -1,23 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class CollisionState : MonoBehaviour
-{
-	[SerializeField] private float maxGroundCheckRayDistance;
-	[SerializeField] private LayerMask layerMask;
+public class CollisionState : MonoBehaviour {
+    [SerializeField] private LayerMask layerMask = 1<<0;
 
-	public bool isGrounded
-	{
-		get
-		{
-			return Physics.Raycast(transform.position, Vector3.down, maxGroundCheckRayDistance, layerMask);
-		}
-	}
-
-	private void OnDrawGizmos()
-	{
-		// Gizmos.color = Color.green;
-		// Gizmos.DrawRay(transform.position, Vector3.down * maxGroundCheckRayDistance);
-	}
+    public bool IsGrounded {
+        get {
+            return Physics.Raycast(transform.position, Vector3.down, 1f, layerMask);
+        }
+    }
 }

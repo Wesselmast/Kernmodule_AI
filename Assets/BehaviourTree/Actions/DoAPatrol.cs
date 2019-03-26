@@ -12,16 +12,18 @@ namespace IMBT {
         }
 
         public override BTTaskStatus Tick(BlackBoard bb) {
-            if (!bb.IsPatrolling) {
-                bb.IsPatrolling = true;
-                bb.IsInspecting = false;
-                bb.IsMovingBack = false;
-                if (patrolIndex > bb.PatrolPath.GetWaypoints().Count - 1) patrolIndex = 0;
-                PathRequestManager.RequestPath(new PathRequest(bb.Agent.transform.position, bb.PatrolPath.GetWaypoints()[patrolIndex].position,
+            if (!bb.GetValue<bool>("IsPatrolling")) {
+                bb.SetValue("IsInspecting", false);
+                bb.SetValue("IsPatrolling", true);
+                bb.SetValue("IsMovingBack", false);
+                if (patrolIndex > bb.GetValue<WaypointCollection>("Patrol Path").GetWaypoints().Count - 1) patrolIndex = 0;
+                PathRequestManager.RequestPath(new PathRequest(bb.GetValue<GameObject>("Agent").
+                             transform.position, bb.GetValue<WaypointCollection>("Patrol Path").
+                                                           GetWaypoints()[patrolIndex].position,
                     (Vector3[] newPath, bool success) => {
                         if (success) {
                             patrolIndex++;
-                            bb.Path = newPath;
+                            bb.SetValue("Path", newPath);
                             monoBehaviour.StopAllCoroutines();
                             monoBehaviour.StartCoroutine(DoPath(bb));
                         }
@@ -31,20 +33,22 @@ namespace IMBT {
         }
 
         private IEnumerator DoPath(BlackBoard bb) {
-            Vector3 currentWp = bb.Path[0];
+            Vector3[] path = bb.GetValue<Vector3[]>("Path");
+            GameObject agent = bb.GetValue<GameObject>("Agent");
+            Vector3 currentWp = path[0];
             int index = 0;
             while (true) {
-                if (Vector3.Distance(bb.Agent.transform.position, currentWp) < approachRange) {
+                if (Vector3.Distance(agent.transform.position, currentWp) < approachRange) {
                     index++;
-                    if (index >= bb.Path.Length) {
-                        bb.IsPatrolling = false;
+                    if (index >= path.Length) {
+                        bb.SetValue("IsPatrolling", false);
                         yield break;
                     }
-                    currentWp = bb.Path[index];
+                    currentWp = path[index];
                 }
-                bb.Agent.transform.position += (currentWp - bb.Agent.transform.position).normalized * bb.Speed * Time.deltaTime;
-                Quaternion lookRot = Quaternion.LookRotation((currentWp - bb.Agent.transform.position).normalized);
-                bb.Agent.transform.rotation = Quaternion.Slerp(bb.Agent.transform.rotation, lookRot, Time.deltaTime * bb.Settings.TurnSpeed);
+                agent.transform.position += (currentWp - agent.transform.position).normalized * bb.GetValue<float>("Speed") * Time.deltaTime;
+                Quaternion lookRot = Quaternion.LookRotation((currentWp - agent.transform.position).normalized);
+                agent.transform.rotation = Quaternion.Slerp(agent.transform.rotation, lookRot, Time.deltaTime * bb.Settings.TurnSpeed);
                 yield return null;
             }
         }

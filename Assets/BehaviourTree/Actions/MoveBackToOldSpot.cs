@@ -12,43 +12,45 @@ namespace IMBT {
         }
 
         public override BTTaskStatus Tick(BlackBoard bb) {
-            if (!bb.IsMovingBack) {
+            if (!bb.GetValue<bool>("IsMovingBack")) {
                 doneCalculation = false;
-                bb.IsPatrolling = false;
-                bb.IsMovingBack = true;
-                PathRequestManager.RequestPath(new PathRequest(bb.Agent.transform.position, bb.OldSpot,
+                bb.SetValue("IsPatrolling", false);
+                bb.SetValue("IsMovingBack", true);
+                PathRequestManager.RequestPath(new PathRequest(bb.GetValue<GameObject>("Agent").transform.position, bb.GetValue<Vector3>("OldSpot"),
                     (Vector3[] newPath, bool success) => {
                         if (success) {
-                            bb.Path = newPath;
+                            bb.SetValue("Path", newPath);
                             monoBehaviour.StopAllCoroutines();
                             monoBehaviour.StartCoroutine(DoPath(bb));
                         }
                     }));
             }
             if (doneCalculation) {
-                bb.OldSpotSaved = false;
-                bb.IsInspecting = false;
-                if(bb.State == BTState.GroupInspect) bb.WasInGroupInspect = true;
+                bb.SetValue("OldSpotSaved", false);
+                bb.SetValue("IsInspecting", false);
+                if(bb.GetValue<BTState>("State") == BTState.GroupInspect) bb.SetValue("WasInGroupInspect", true);
                 return BTTaskStatus.Success;
             }
             return BTTaskStatus.Running;
         }
 
         private IEnumerator DoPath(BlackBoard bb) {
-            Vector3 currentWp = bb.Path[0];
+            Vector3[] path = bb.GetValue<Vector3[]>("Path");
+            GameObject agent = bb.GetValue<GameObject>("Agent");
+            Vector3 currentWp = path[0];
             int index = 0;
             while (true) {
-                if (Vector3.Distance(bb.Agent.transform.position, currentWp) < approachRange) {
+                if (Vector3.Distance(agent.transform.position, currentWp) < approachRange) {
                     index++;
-                    if (index >= bb.Path.Length) {
+                    if (index >= path.Length) {
                         doneCalculation = true;
                         yield break;
                     }
-                    currentWp = bb.Path[index];
+                    currentWp = path[index];
                 }
-                bb.Agent.transform.position += (currentWp - bb.Agent.transform.position).normalized * bb.Speed * Time.deltaTime;
-                Quaternion lookRot = Quaternion.LookRotation((currentWp - bb.Agent.transform.position).normalized);
-                bb.Agent.transform.rotation = Quaternion.Slerp(bb.Agent.transform.rotation, lookRot, Time.deltaTime * bb.Settings.TurnSpeed);
+                agent.transform.position += (currentWp - agent.transform.position).normalized * bb.GetValue<float>("Speed") * Time.deltaTime;
+                Quaternion lookRot = Quaternion.LookRotation((currentWp - agent.transform.position).normalized);
+                agent.transform.rotation = Quaternion.Slerp(agent.transform.rotation, lookRot, Time.deltaTime * bb.Settings.TurnSpeed);
                 yield return null;
             }
         }

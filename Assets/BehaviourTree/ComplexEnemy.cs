@@ -3,22 +3,22 @@ using UnityEngine;
 using IMBT;
 
 public class ComplexEnemy : MonoBehaviour {
-    public BlackBoard blackBoard;
-    [SerializeField] private WaypointCollection patrolPath;
-    [SerializeField] private Transform target;
+    [SerializeField] private BlackBoard blackBoard = null;
+    public BlackBoard BlackBoard { get { return blackBoard; } }
+
+    [SerializeField] private WaypointCollection patrolPath = null;
+    [SerializeField] private Transform target = null;
+
     private BTSelector BT;
 
     private void Awake() {
-        blackBoard.IsPatrolling = false;
-        blackBoard.WasInGroupInspect = false;
-        blackBoard.IsInspecting = false;
-        blackBoard.IsTakingCover = false;
-        blackBoard.Agent = gameObject;
-        blackBoard.Fov = GetComponent<EnemyFOV>();
-        blackBoard.PatrolPath = patrolPath;
-        blackBoard.Target = target;
-        blackBoard.State = BTState.Patrol;
-        blackBoard.Speed = blackBoard.Settings.WalkSpeed;
+        blackBoard.SetValue("FOV", GetComponent<EnemyFOV>());
+        blackBoard.SetValue("Patrol Path", patrolPath);
+        blackBoard.SetValue("Target", target);
+        blackBoard.SetValue("Path", patrolPath);
+        blackBoard.SetValue("State", BTState.Patrol);
+        blackBoard.SetValue("Agent", gameObject);
+        blackBoard.SetValue("Speed", blackBoard.Settings.WalkSpeed);
     }
 
     private void Start() {
@@ -46,7 +46,6 @@ public class ComplexEnemy : MonoBehaviour {
                          new BTSequence(
                              new GetNearestCoverPoint(),
                              new TakeCover(this),
-                             new BTLog("Now In Cover"),
                              new BTSequence(
                                 new BTTimer(1f),
                                 new DoAYell()
@@ -118,17 +117,5 @@ public class ComplexEnemy : MonoBehaviour {
 
     private void Update() {
         BT.Tick(blackBoard);
-        Debug.Log(blackBoard.State);
-    }
-
-    private void OnDrawGizmos() {
-        if (blackBoard.Path != null) {
-            for (int i = 0; i < blackBoard.Path.Length; i++) {
-                Gizmos.color = Color.cyan;
-                try { Gizmos.DrawLine(blackBoard.Path[i - 1], blackBoard.Path[i]); }
-                catch { Gizmos.DrawLine(transform.position, blackBoard.Path[i]); }
-                Gizmos.DrawCube(blackBoard.Path[i], Vector3.one);
-            }
-        }
     }
 }

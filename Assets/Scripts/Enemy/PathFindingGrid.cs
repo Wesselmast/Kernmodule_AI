@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class Grid : MonoBehaviour {
-    [SerializeField] private LayerMask obstacleMask;
-    [SerializeField] private float nodeRadius;
-    [SerializeField] private GameObject plane;
+public class PathFindingGrid : MonoBehaviour {
+    [SerializeField] private LayerMask obstacleMask = 1<<0;
+    [SerializeField] private float nodeRadius = .5f;
+    [SerializeField] private GameObject plane = null;
 
     private Node[,] grid;
     private int gridX, gridZ;

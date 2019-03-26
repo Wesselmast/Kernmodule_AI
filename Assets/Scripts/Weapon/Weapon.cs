@@ -2,28 +2,21 @@
 
 [RequireComponent(typeof(AudioSource))]
 public class Weapon : MonoBehaviour {
-    [SerializeField] private WeaponSettings globalSettings;
+    [SerializeField] private WeaponSettings settings;
 
     private AudioSource source;
     private Animator anim;
     private Transform attackPoint;
     private float attackSpeedElapsed;
 
-    public WeaponSettings GlobalSettings {
+    public WeaponSettings Settings {
         get {
-            return globalSettings;
+            return settings;
         }
         set {
-            globalSettings = value;
+            settings = value;
         }
     }
-
-    public WeaponMoodSettings Settings {
-        get {
-            return (WeaponMoodSettings)globalSettings.GetMoodSettings(MindStateManager.State);
-        }
-    }
-
 
     void Awake() {
         foreach (var t in GetComponentsInChildren<Transform>()) {
@@ -74,6 +67,6 @@ public class Weapon : MonoBehaviour {
         bullet.transform.position = attackPoint.position;
         bullet.transform.rotation = attackPoint.rotation;
         float rand = Random.Range(-Settings.BulletSpread, Settings.BulletSpread);
-        bullet.transform.Rotate(new Vector3(rand,rand,rand));
+        bullet.transform.Rotate(new Vector3(rand, rand, rand));
     }
 }

@@ -11,7 +11,7 @@ namespace IMBT {
                 return BTTaskStatus.Success;
             }
             totalRotation -= rotation;
-            bb.Agent.transform.Rotate(new Vector3(0f, rotation, 0f));
+            bb.GetValue<GameObject>("Agent").transform.Rotate(new Vector3(0f, rotation, 0f));
             return BTTaskStatus.Running;
         }
     }

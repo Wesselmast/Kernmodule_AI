@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7342231276680323541}
   - component: {fileID: 7342231276680323499}
   - component: {fileID: 7342231276680323498}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 7342231276778078035}
   - component: {fileID: 7342231276778078038}
   - component: {fileID: 7342231276778078033}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -165,7 +165,7 @@ GameObject:
   - component: {fileID: 7342231276823200106}
   - component: {fileID: 7342231276823200107}
   - component: {fileID: 7342231276823200104}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Rifle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -200,7 +200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf8a4db134d9dfb46b28d2176b62362d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  globalSettings: {fileID: 11400000, guid: 6e903e923a337a340a560aba046ad918, type: 2}
+  settings: {fileID: 11400000, guid: 6e903e923a337a340a560aba046ad918, type: 2}
 --- !u!82 &7342231276823200104
 AudioSource:
   m_ObjectHideFlags: 0
@@ -308,7 +308,7 @@ GameObject:
   - component: {fileID: 7342231276943969420}
   - component: {fileID: 7342231276943969410}
   - component: {fileID: 7342231276943969421}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -385,7 +385,7 @@ GameObject:
   - component: {fileID: 7342231277447785681}
   - component: {fileID: 7342231277447785687}
   - component: {fileID: 7342231277447785686}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -462,7 +462,7 @@ GameObject:
   - component: {fileID: 7342231277459937341}
   - component: {fileID: 7342231277459937331}
   - component: {fileID: 7342231277459937330}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -537,7 +537,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7342231277598181686}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: AttackPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -568,7 +568,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7342231277909727263}
   - component: {fileID: 7342231277909727261}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -644,7 +644,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7342231278007090815}
   - component: {fileID: 7342231278007090812}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -697,7 +697,7 @@ GameObject:
   - component: {fileID: 7342231278021838262}
   - component: {fileID: 7342231278021838260}
   - component: {fileID: 7342231278021838263}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Knife
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -732,7 +732,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf8a4db134d9dfb46b28d2176b62362d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  globalSettings: {fileID: 11400000, guid: 6d5c0be74666c3444976de7d308e13c7, type: 2}
+  settings: {fileID: 11400000, guid: 6d5c0be74666c3444976de7d308e13c7, type: 2}
 --- !u!82 &7342231278021838263
 AudioSource:
   m_ObjectHideFlags: 0
@@ -840,7 +840,7 @@ GameObject:
   - component: {fileID: 7342231278074999007}
   - component: {fileID: 7342231278074999005}
   - component: {fileID: 7342231278074999004}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -917,7 +917,7 @@ GameObject:
   - component: {fileID: 7342231278236495221}
   - component: {fileID: 7342231278236495179}
   - component: {fileID: 7342231278236495178}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -994,7 +994,7 @@ GameObject:
   - component: {fileID: 7342231278306335771}
   - component: {fileID: 7342231278306335774}
   - component: {fileID: 7342231278306335769}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1069,7 +1069,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7342231278328267012}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: AttackPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1099,7 +1099,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7342231278355495494}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: AttackPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1131,7 +1131,7 @@ GameObject:
   - component: {fileID: 7342231278696130538}
   - component: {fileID: 7342231278696130536}
   - component: {fileID: 7342231278696130539}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Pistol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1166,7 +1166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf8a4db134d9dfb46b28d2176b62362d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  globalSettings: {fileID: 11400000, guid: 27081086fbab2a34b892640b3c17f495, type: 2}
+  settings: {fileID: 11400000, guid: 27081086fbab2a34b892640b3c17f495, type: 2}
 --- !u!82 &7342231278696130539
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1273,7 +1273,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7342231278710052249}
   - component: {fileID: 7342231278710052254}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1336,7 +1336,7 @@ GameObject:
   - component: {fileID: 7342231278736500178}
   - component: {fileID: 7342231278736500142}
   - component: {fileID: 7342231278736500137}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1445,7 +1445,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e9482865412c4f6ebe38d0dab4b8dc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  globalSettings: {fileID: 11400000, guid: f3d94507e7d64804cbd7d054b6983b05, type: 2}
+  settings: {fileID: 11400000, guid: cb2197bc5f0cdf94cad030578cf608ad, type: 2}
 --- !u!114 &7342231278736500182
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1458,7 +1458,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 720b05979db434eec926ba91065be91d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxGroundCheckRayDistance: 1.05
   layerMask:
     serializedVersion: 2
     m_Bits: 1335
@@ -1544,7 +1543,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7342231278781442519}
   - component: {fileID: 7342231278781442516}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}

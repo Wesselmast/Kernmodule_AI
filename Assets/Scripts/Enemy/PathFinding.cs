@@ -3,12 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Grid))]
+[RequireComponent(typeof(PathFindingGrid))]
 public class PathFinding : MonoBehaviour {
-    private Grid grid;
+    private PathFindingGrid grid;
 
     private void Awake() {
-        grid = GetComponent<Grid>();
+        grid = GetComponent<PathFindingGrid>();
     }
    
     public void FindPath(PathRequest request, Action<PathResult> callback) {

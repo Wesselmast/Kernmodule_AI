@@ -12,35 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1f401ee5d99e494da633634d66e3cd3, type: 3}
   m_Name: Player
   m_EditorClassIdentifier: 
-  normal:
-    walkSpeed: 8
-    runSpeed: 15
-    lookAroundSens: 5
-    lookAroundSmooth: 5
-    jumpForce: 6
-    weaponSwitchTime: 1
-    maxYAngleForCamera: 80
-  manic:
-    walkSpeed: 10
-    runSpeed: 17
-    lookAroundSens: 5
-    lookAroundSmooth: 5
-    jumpForce: 6
-    weaponSwitchTime: 1
-    maxYAngleForCamera: 80
-  psychotic:
-    walkSpeed: 8
-    runSpeed: 50
-    lookAroundSens: 5
-    lookAroundSmooth: 5
-    jumpForce: 50
-    weaponSwitchTime: 0
-    maxYAngleForCamera: 80
-  depressed:
-    walkSpeed: 6
-    runSpeed: 10
-    lookAroundSens: 4
-    lookAroundSmooth: 15
-    jumpForce: 5
-    weaponSwitchTime: 1
-    maxYAngleForCamera: 80
+  walkSpeed: 8
+  runSpeed: 15
+  lookAroundSens: 10
+  lookAroundSmooth: 2
+  jumpForce: 7
+  weaponSwitchTime: 1
+  maxYAngleForCamera: 80

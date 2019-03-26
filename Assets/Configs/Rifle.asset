@@ -12,43 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e23492380e00e04bb86a7a30b210c71, type: 3}
   m_Name: Rifle
   m_EditorClassIdentifier: 
-  normal:
-    attackSpeed: 10
-    attackDamage: 5
-    maxAmmo: 5
-    bulletLifeTime: 4
-    meleeRange: 0
-    bulletTravelSpeed: 100
-    bulletSpread: 4
-    attackSound: {fileID: 8300000, guid: f9285bbad2c2dcb4f83bf4ade1f94091, type: 3}
-    isMelee: 0
-  manic:
-    attackSpeed: 10
-    attackDamage: 2
-    maxAmmo: 5
-    bulletLifeTime: 15
-    meleeRange: 0
-    bulletTravelSpeed: 4
-    bulletSpread: 4
-    attackSound: {fileID: 8300000, guid: f9285bbad2c2dcb4f83bf4ade1f94091, type: 3}
-    isMelee: 0
-  psychotic:
-    attackSpeed: 10
-    attackDamage: 5
-    maxAmmo: 5
-    bulletLifeTime: 4
-    meleeRange: 0
-    bulletTravelSpeed: 60
-    bulletSpread: 50
-    attackSound: {fileID: 8300000, guid: f9285bbad2c2dcb4f83bf4ade1f94091, type: 3}
-    isMelee: 0
-  depressed:
-    attackSpeed: 10
-    attackDamage: 5
-    maxAmmo: 5
-    bulletLifeTime: 4
-    meleeRange: 0
-    bulletTravelSpeed: 100
-    bulletSpread: 4
-    attackSound: {fileID: 8300000, guid: f9285bbad2c2dcb4f83bf4ade1f94091, type: 3}
-    isMelee: 0
+  attackSpeed: 15
+  attackDamage: 10
+  maxAmmo: 20
+  bulletLifeTime: 10
+  meleeRange: 5
+  bulletTravelSpeed: 100
+  bulletSpread: 5
+  attackSound: {fileID: 8300000, guid: f9285bbad2c2dcb4f83bf4ade1f94091, type: 3}
+  isMelee: 0

@@ -7,7 +7,7 @@
         }
 
         public override BTTaskStatus Tick(BlackBoard bb) {
-            bb.State = state;
+            bb.SetValue("State", state);
             return BTTaskStatus.Success;
         }
     }

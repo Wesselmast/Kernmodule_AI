@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -7,7 +6,7 @@ using UnityEngine;
 public abstract class PlayerBehaviour : MonoBehaviour {
     protected static Rigidbody rb;
     protected static CollisionState collisionState;
-    protected static PlayerMoodSettings settings;
+    protected static PlayerSettings settings;
 
     private static Player player;
 
@@ -19,11 +18,11 @@ public abstract class PlayerBehaviour : MonoBehaviour {
     }
 
     protected virtual void Start() {
+        settings = player.Settings;
         Begin();
     }
 
     protected virtual void Update() {
-        settings = player.Settings;
         Tick();
     }
 

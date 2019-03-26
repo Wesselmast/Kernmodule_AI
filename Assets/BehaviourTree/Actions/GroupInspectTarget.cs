@@ -16,14 +16,14 @@ namespace IMBT {
             if (!done) {
                 done = true;
                 doneCalculation = false;
-                bb.IsInspecting = true;
-                bb.IsPatrolling = false;
-                bb.IsMovingBack = false;
-                PathRequestManager.RequestPath(new PathRequest(bb.Agent.transform.position, bb.Target.position,
+                bb.SetValue("IsInspecting", true);
+                bb.SetValue("IsPatrolling", false);
+                bb.SetValue("IsMovingBack", false);
+                PathRequestManager.RequestPath(new PathRequest(bb.GetValue<GameObject>("Agent").transform.position, bb.GetValue<Transform>("Target").position,
                     (Vector3[] newPath, bool success) => {
                         if (success) {
-                            bb.Speed = bb.Settings.RunSpeed;
-                            bb.Path = newPath;
+                            bb.SetValue("Speed", bb.Settings.RunSpeed);
+                            bb.SetValue("Path", newPath);
                             monoBehaviour.StopAllCoroutines();
                             monoBehaviour.StartCoroutine(DoPath(bb));
                         }
@@ -34,20 +34,22 @@ namespace IMBT {
         }
 
         private IEnumerator DoPath(BlackBoard bb) {
-            Vector3 currentWp = bb.Path[0];
+            Vector3[] path = bb.GetValue<Vector3[]>("Path");
+            GameObject agent = bb.GetValue<GameObject>("Agent");
+            Vector3 currentWp = path[0];
             int index = 0;
             while (true) {
-                if (Vector3.Distance(bb.Agent.transform.position, currentWp) < approachRange) {
+                if (Vector3.Distance(agent.transform.position, currentWp) < approachRange) {
                     index++;
-                    if (index >= bb.Path.Length) {
+                    if (index >= path.Length) {
                         doneCalculation = true;
                         yield break;
                     }
-                    currentWp = bb.Path[index];
+                    currentWp = path[index];
                 }
-                bb.Agent.transform.position += (currentWp - bb.Agent.transform.position).normalized * bb.Speed * Time.deltaTime;
-                Quaternion lookRot = Quaternion.LookRotation((currentWp - bb.Agent.transform.position).normalized);
-                bb.Agent.transform.rotation = Quaternion.Slerp(bb.Agent.transform.rotation, lookRot, Time.deltaTime * bb.Settings.TurnSpeed);
+                agent.transform.position += (currentWp - agent.transform.position).normalized * bb.GetValue<float>("Speed") * Time.deltaTime;
+                Quaternion lookRot = Quaternion.LookRotation((currentWp - agent.transform.position).normalized);
+                agent.transform.rotation = Quaternion.Slerp(agent.transform.rotation, lookRot, Time.deltaTime * bb.Settings.TurnSpeed);
                 yield return null;
             }
         }

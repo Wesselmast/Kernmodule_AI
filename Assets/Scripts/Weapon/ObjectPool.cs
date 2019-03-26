@@ -2,8 +2,8 @@
 using UnityEngine;
 
 public abstract class ObjectPool<T> : MonoBehaviour where T : Component {
-    [SerializeField] private T prefab;
-    [SerializeField] private int maxAmt;
+    [SerializeField] private int maxAmt = 50;
+    [SerializeField] private T prefab = null;
 
     public static ObjectPool<T> Instance { get; private set; }
     private Queue<T> objects = new Queue<T>();

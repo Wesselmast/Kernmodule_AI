@@ -13,8 +13,7 @@ public class PlayerJump : PlayerBehaviour {
     }
 
     private void HandleJump() {
-        if (collisionState.isGrounded) {
-            rb.AddForce(new Vector3(0, settings.JumpForce, 0), ForceMode.Impulse);
-        }
+        if (!collisionState.IsGrounded) return;
+        rb.AddForce(new Vector3(0, settings.JumpForce, 0), ForceMode.Impulse);
     }
 }
