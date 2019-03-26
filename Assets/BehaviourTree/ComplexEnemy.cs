@@ -46,12 +46,26 @@ public class ComplexEnemy : MonoBehaviour {
                          new BTSequence(
                              new GetNearestCoverPoint(),
                              new TakeCover(this),
+                             new LookAtTarget(),
                              new BTSequence(
-                                new BTTimer(1f),
-                                new DoAYell()
-                                )
+                                 new BTTimer(3f),
+                                 new BTBreak()
+                                 )
                              ),
-                         new ChaseTheTarget(this)
+                         new BTSequence(
+                             new TargetInVisibleRange(),
+                             new ShootPlayer()
+                             ),
+                         new BTSequence(
+                             new BTTimer(1f),
+                             new DoAYell()
+                             ),
+                         new BTSequence(
+                            new BTTimer(3f),
+                            new BTLog("LALALALLA"),
+                            new ChaseTheTarget(this),
+                            new SetCurrentState(BTState.Patrol)
+                            )
                          )
                      ),
                  new BTSequence(
@@ -59,6 +73,7 @@ public class ComplexEnemy : MonoBehaviour {
                      new BTSelector(
                          new BTSequence(
                              new WasInGroupInspect(),
+                             new ChaseTheTarget(this),
                              new SetCurrentState(BTState.Patrol)
                              ),
                         new BTSequence(
@@ -117,5 +132,6 @@ public class ComplexEnemy : MonoBehaviour {
 
     private void Update() {
         BT.Tick(blackBoard);
+        Debug.Log(blackBoard.GetValue<BTState>("State"));
     }
 }

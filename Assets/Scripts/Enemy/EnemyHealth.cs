@@ -1,11 +1,10 @@
 ﻿using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour, IDamagable {
-    [SerializeField] private float maxHealth = 100f;
     private float currentHealth;
 
     private void Start() {
-        currentHealth = maxHealth;
+        currentHealth = GetComponent<ComplexEnemy>().BlackBoard.Settings.Health;
     }
 
     public void TakeDamage(float damage) {

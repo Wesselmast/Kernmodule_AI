@@ -10,4 +10,6 @@ public class BlackBoardSettings : ScriptableObject {
     public float TurnSpeed { get { return turnSpeed; } }
     [SerializeField] private float lookAroundSpeed = 65f;
     public float LookAroundSpeed { get { return lookAroundSpeed; } }
+    [SerializeField] private float health = 100f;
+    public float Health { get { return health; } }
 }
