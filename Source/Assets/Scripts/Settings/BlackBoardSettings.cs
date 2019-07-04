@@ -12,4 +12,6 @@ public class BlackBoardSettings : ScriptableObject {
     public float LookAroundSpeed { get { return lookAroundSpeed; } }
     [SerializeField] private float health = 100f;
     public float Health { get { return health; } }
+    [SerializeField] private AudioClip chargeSound = default;
+    public AudioClip ChargeSound { get { return chargeSound; } }
 }

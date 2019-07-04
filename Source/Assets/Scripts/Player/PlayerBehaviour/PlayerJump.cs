@@ -1,4 +1,4 @@
-﻿using IsolatedMind.Input;
+﻿using Kernmodule3.Input;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

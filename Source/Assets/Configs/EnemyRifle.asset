@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e23492380e00e04bb86a7a30b210c71, type: 3}
   m_Name: EnemyRifle
   m_EditorClassIdentifier: 
-  attackSpeed: 10
-  attackDamage: 8
+  attackSpeed: 3
+  attackDamage: 17
   maxAmmo: 20
   bulletLifeTime: 10
   meleeRange: 5
   bulletTravelSpeed: 80
-  bulletSpread: 2.5
+  bulletSpread: 0
   attackSound: {fileID: 8300000, guid: f9285bbad2c2dcb4f83bf4ade1f94091, type: 3}
   isMelee: 0

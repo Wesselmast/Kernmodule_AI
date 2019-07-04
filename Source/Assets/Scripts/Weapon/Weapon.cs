@@ -54,16 +54,24 @@ public class Weapon : MonoBehaviour {
     }
 
     private void Slice(Ray ray) {
-        anim.Play("Slice");
+        if (anim != null) anim.Play("Slice");
+        source.PlayOneShot(Settings.AttackSound);
         Vector3 hitPoint = Physics.Raycast(ray, out RaycastHit hit, Settings.MeleeRange) ?
                     hit.point : ray.origin + ray.direction * Settings.MeleeRange;
-        try { hit.collider.GetComponentInParent<IDamagable>().TakeDamage(Settings.AttackDamage); }
-        catch { }
+        Collider hitCollider = hit.collider;
+        if (hitCollider == null) return;
+        IHealth health = hitCollider.GetComponentInParent<IHealth>();
+        if (health == null) return;
+        health.TakeDamage(Settings.AttackDamage);
     }
 
     private void Shoot() {
-        anim.Play("Shoot");
+        if (anim != null) anim.Play("Shoot");
+        source.PlayOneShot(Settings.AttackSound);
         Bullet bullet = BulletPool.Instance.Get();
+        bullet.Lifetime = settings.BulletLifeTime;
+        bullet.Damage = settings.AttackDamage;
+        bullet.BulletTravelSpeed = settings.BulletTravelSpeed;
         bullet.transform.position = attackPoint.position;
         bullet.transform.rotation = attackPoint.rotation;
         float rand = Random.Range(-Settings.BulletSpread, Settings.BulletSpread);

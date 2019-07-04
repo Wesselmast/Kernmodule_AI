@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Pistol
   m_EditorClassIdentifier: 
   attackSpeed: 5
-  attackDamage: 35
+  attackDamage: 34
   maxAmmo: 20
   bulletLifeTime: 10
   meleeRange: 5
   bulletTravelSpeed: 100
-  bulletSpread: 2
+  bulletSpread: 0.5
   attackSound: {fileID: 8300000, guid: f9285bbad2c2dcb4f83bf4ade1f94091, type: 3}
   isMelee: 0

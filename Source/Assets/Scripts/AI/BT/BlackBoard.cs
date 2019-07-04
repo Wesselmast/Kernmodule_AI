@@ -13,12 +13,13 @@ public class BlackBoard {
         return (T)variables[name];
     }
 
-    public void SetValue<T>(string name, T value) {
+    public T SetValue<T>(string name, T value) {
         if (variables.ContainsKey(name)) {
             variables[name] = value;
         }
         else {
             variables.Add(name, value);
         }
+        return value;
     }
 }

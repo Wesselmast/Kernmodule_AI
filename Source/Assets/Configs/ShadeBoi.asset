@@ -17,3 +17,4 @@ MonoBehaviour:
   turnSpeed: 6
   lookAroundSpeed: 180
   health: 100
+  chargeSound: {fileID: 8300000, guid: 13179f785171604479d798b8b35a245f, type: 3}

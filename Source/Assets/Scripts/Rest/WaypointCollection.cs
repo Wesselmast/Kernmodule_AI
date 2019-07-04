@@ -1,20 +1,16 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using UnityEngine;
 
 public class WaypointCollection : MonoBehaviour {
-    private List<Transform> waypoints = new List<Transform>();
+    private Vector3[] waypoints = default;
 
     private void Awake() {
-        Transform[] wps = GetComponentsInChildren<Transform>();
-        foreach (Transform wp in wps.Where(go => go.gameObject != gameObject)) {
-            if (wp.GetInstanceID() != GetInstanceID()) {
-                waypoints.Add(wp);
-            }
-        }
+        waypoints = GetComponentsInChildren<Transform>().
+                    Where(go => go.gameObject != gameObject).
+                    Select(wp => wp.position).ToArray();
     }
 
-    public List<Transform> GetWaypoints() {
+    public Vector3[] GetWaypoints() {
         return waypoints;
     }
 }

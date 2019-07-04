@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using IsolatedMind.Input;
+using Kernmodule3.Input;
 using System.Collections;
 
 public class PlayerWeaponChange : PlayerBehaviour {

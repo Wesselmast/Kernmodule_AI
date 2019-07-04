@@ -22,14 +22,8 @@ public abstract class PlayerBehaviour : MonoBehaviour {
         Begin();
     }
 
-    protected virtual void Update() {
-        Tick();
-    }
-
     ///<summary>replaces the Awake() method in EnemyComponents</summary>
     protected virtual void Wake() { }
     ///<summary>replaces the Start() method in EnemyComponents</summary>
     protected virtual void Begin() { }
-    ///<summary>replaces the Update() method in EnemyComponents</summary>
-    protected virtual void Tick() { }
 }

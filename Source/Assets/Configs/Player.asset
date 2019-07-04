@@ -18,4 +18,5 @@ MonoBehaviour:
   lookAroundSmooth: 2
   jumpForce: 7
   weaponSwitchTime: 1
+  health: 150
   maxYAngleForCamera: 80
