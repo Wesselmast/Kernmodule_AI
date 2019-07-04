@@ -9,16 +9,28 @@ public class PlayerCrouch : PlayerBehaviour {
     protected override void Wake() {
         cam = Camera.main;
         startPosition = cam.transform.localPosition;
-        PlayerInput.OnCrouching += () => {
-            StopAllCoroutines();
-            StartCoroutine(MoveTowards(startPosition.y + settings.CrouchEndYPosition));
-        };
-        PlayerInput.OnStopCrouching += () => {
-            StopAllCoroutines();
-            StartCoroutine(MoveTowards(startPosition.y));
-        };
     }
 
+    private void OnEnable() {
+        PlayerInput.OnCrouching += Crouch;
+        PlayerInput.OnStopCrouching += StopCrouch;
+    }
+
+    private void OnDisable() {
+        PlayerInput.OnCrouching -= Crouch;
+        PlayerInput.OnStopCrouching -= StopCrouch;
+    }
+
+    private void Crouch() {
+        StopAllCoroutines();
+        StartCoroutine(MoveTowards(startPosition.y + settings.CrouchEndYPosition));
+    }
+
+    private void StopCrouch() {
+        StopAllCoroutines();
+        StartCoroutine(MoveTowards(startPosition.y));
+    }
+    
     private IEnumerator MoveTowards(float towards) {
         while (!CloseTo(cam.transform.localPosition.y - towards, 0.05f)) {
             float yVel = 0;

@@ -14,9 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 8
   runSpeed: 15
-  lookAroundSens: 10
-  lookAroundSmooth: 2
+  lookAroundSens: 6
+  lookAroundSmooth: 3
   jumpForce: 7
   weaponSwitchTime: 1
   health: 150
   maxYAngleForCamera: 80
+  crouchSpeed: 1.2
+  crouchrunSpeed: 3
+  crouchTime: 0.3
+  crouchEndYPosition: -0.5

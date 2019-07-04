@@ -19,19 +19,17 @@
 
             private MoveMode moveMode = MoveMode.Walking;
             private bool crouching = false;
+            private float horizontalMove, verticalMove;
 
             private void Update() {
-                HandleLookAround();
-                HandleMovement();
-                HandleWeaponChange();
-                if (Input.GetKeyDown(KeyCode.Space)) OnJump();
-                if (Input.GetKey(KeyCode.Mouse0)) OnAttack();
-                MousePosition = Input.mousePosition;
-            }
+                horizontalMove = Input.GetAxisRaw("Horizontal");
+                verticalMove = Input.GetAxisRaw("Vertical");
+                float deltaX = Input.GetAxisRaw("Mouse X");
+                float deltaY = Input.GetAxisRaw("Mouse Y");
 
-            private void HandleMovement() {
-                float horizontalMove = Input.GetAxisRaw("Horizontal");
-                float verticalMove = Input.GetAxisRaw("Vertical");
+                if (!(deltaX == 0.0f && deltaY == 0.0f)) {
+                    OnLookAround(deltaX, deltaY);
+                }
 
                 if (collisionState.IsGrounded) {
                     if (Input.GetKey(KeyCode.LeftShift)) moveMode = MoveMode.Running;
@@ -50,22 +48,21 @@
                     }
                 }
 
-                if (!(horizontalMove == 0.0f && verticalMove == 0.0f)) {
-                    OnMovement(horizontalMove, verticalMove, moveMode);
-                }
-            }
-
-            private void HandleLookAround() {
-                float deltaX = Input.GetAxisRaw("Mouse X");
-                float deltaY = Input.GetAxisRaw("Mouse Y");
-                OnLookAround(deltaX, deltaY);
-            }
-
-            private void HandleWeaponChange() {
                 if (Input.GetKeyDown(KeyCode.Alpha1)) OnWeaponChange(0);
                 if (Input.GetKeyDown(KeyCode.Alpha2)) OnWeaponChange(1);
                 if (Input.GetKeyDown(KeyCode.Alpha3)) OnWeaponChange(2);
+                if (Input.GetKeyDown(KeyCode.Space)) OnJump();
+                if (Input.GetKey(KeyCode.Mouse0)) OnAttack();
+                MousePosition = Input.mousePosition;
             }
+
+            private void FixedUpdate() {
+                if (!(horizontalMove == 0.0f && verticalMove == 0.0f)) {
+                    OnMovement(horizontalMove, verticalMove, moveMode);
+                }
+                moveMode = MoveMode.Walking;
+            }
+
         }
     }
 }
